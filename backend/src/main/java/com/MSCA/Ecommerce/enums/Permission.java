@@ -1,0 +1,53 @@
+package com.MSCA.Ecommerce.enums;
+
+public enum Permission {
+
+    // Super Admin
+    USER_MANAGE,
+    ROLE_ASSIGN,
+    WAREHOUSE_CONFIGURE,
+    AUDIT_VIEW,
+    SYSTEM_OVERRIDE,
+
+    // Warehouse Admin
+    WAREHOUSE_CREATE,
+    WAREHOUSE_EDIT,
+    ZONE_CONFIGURE,
+    MANAGER_ASSIGN,
+    REPORT_VIEW_ALL,
+
+    // Warehouse Manager
+    SHIPMENT_APPROVE,
+    INVENTORY_ADJUST,
+    STAFF_ASSIGN,
+    REPORT_VIEW_MANAGER,
+    EXCEPTION_RESOLVE,
+
+    // Warehouse Supervisor
+    TASK_VERIFY,
+    ORDER_CHECK,
+    REPORT_VIEW_SUPERVISOR,
+    EXCEPTION_FLAG,
+    INVENTORY_REQUEST_ADJUSTMENT,
+
+    // Warehouse Staff Head
+    TASK_ASSIGN_STAFF,
+    TASK_MONITOR,
+    ISSUE_ESCALATE,
+    REPORT_VIEW_STAFFHEAD,
+
+    // Warehouse Staff
+    TASK_EXECUTE_PICK,
+    TASK_EXECUTE_PACK,
+    BARCODE_SCAN,
+    STOCK_UPDATE,
+    ORDER_STATUS_UPDATE,
+
+    // Customer
+    ORDER_PLACE,
+    ORDER_TRACK,
+    ORDER_CANCEL,
+    RETURN_REQUEST,
+    PROFILE_UPDATE
+
+}
