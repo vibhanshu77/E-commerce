@@ -1,5 +1,6 @@
 package com.MSCA.Ecommerce.services;
 import com.MSCA.Ecommerce.entities.*;
+import com.MSCA.Ecommerce.enums.InvoiceStatus;
 import com.MSCA.Ecommerce.enums.OrderStatus;
 import com.MSCA.Ecommerce.helper.eventHelper.OrderCreatedEvent;
 import com.MSCA.Ecommerce.repository.*;
@@ -152,8 +153,8 @@ public class CustomerService {
             invoiceRepo.save(invoice);
 
             // Publishing the event //
-            eventPublisher.publishEvent(new OrderCreatedEvent(customerOrder, customer));
-
+            eventPublisher.publishEvent(new OrderCreatedEvent(customerOrder, customer, invoice));
+//            eventPublisher.publishEvent(new OrderCreatedEvent(customerOrder.getOrderId(), customer.getCustomerId(), invoice.getInvoiceNumber()));
         }catch(Exception e){
             throw e;
         }

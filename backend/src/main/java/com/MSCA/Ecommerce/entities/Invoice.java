@@ -32,7 +32,7 @@ public class Invoice {
 //    private String invoiceNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", nullable = false)
+    @JoinColumn(name = "order_id", nullable = false, unique = true)
     private CustomerOrder order;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -40,17 +40,17 @@ public class Invoice {
     private Customer customerId;
 
     // Use BigDecimal for precision in financial data
-    @Column(precision = 10, scale = 2)
-    private BigDecimal amount;
+    @Column
+    private Double amount;
 
-    @Column(precision = 10, scale = 2)
-    private BigDecimal tax;
+    @Column
+    private Double tax;
 
-    @Column(precision = 10, scale = 2)
-    private BigDecimal discount;
+    @Column
+    private Double discount;
 
-    @Column(name = "final_amount", precision = 10, scale = 2)
-    private BigDecimal finalAmount;
+    @Column
+    private Double finalAmount;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20)

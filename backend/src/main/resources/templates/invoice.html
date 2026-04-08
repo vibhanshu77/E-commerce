@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        body { font-family: Arial; }
+        .header { text-align: center; font-size: 20px; }
+        .table { width: 100%; border-collapse: collapse; }
+        .table td, .table th { border: 1px solid #ddd; padding: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h2>Invoice</h2>
+</div>
+
+<p>Invoice No: <span th:text="${invoiceNumber}"></span></p>
+<p>Customer ID: <span th:text="${customerId}"></span></p>
+<p>Date: <span th:text="${date}"></span></p>
+
+<table class="table">
+    <tr>
+        <th>Amount</th>
+        <th>Tax</th>
+        <th>Discount</th>
+        <th>Total</th>
+    </tr>
+    <tr>
+        <td th:text="${amount}"></td>
+        <td th:text="${tax}"></td>
+        <td th:text="${discount}"></td>
+        <td th:text="${finalAmount}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
