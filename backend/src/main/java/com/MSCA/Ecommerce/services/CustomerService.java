@@ -10,13 +10,14 @@ import com.MSCA.Ecommerce.responseDtos.CustomerOrderResponseDto;
 import com.MSCA.Ecommerce.responseDtos.CustomerResponseDto;
 import com.MSCA.Ecommerce.responseMapperInterface.CustomerMapper;
 import com.MSCA.Ecommerce.responseMapperInterface.CustomerOrderMapper;
-import jakarta.transaction.Transactional;
+//import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -154,12 +155,12 @@ public class CustomerService {
 
             // Publishing the event //
             eventPublisher.publishEvent(new OrderCreatedEvent(customerOrder, customer, invoice));
+            return "Order Saved successfully";
 //            eventPublisher.publishEvent(new OrderCreatedEvent(customerOrder.getOrderId(), customer.getCustomerId(), invoice.getInvoiceNumber()));
         }catch(Exception e){
-            throw e;
+            e.printStackTrace();
+            throw new RuntimeException("Cannot Save order" + e.getMessage());
         }
-
-        return "Order Saved successfully";
     }
 
 }

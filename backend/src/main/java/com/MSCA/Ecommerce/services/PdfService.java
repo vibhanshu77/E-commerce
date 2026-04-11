@@ -2,8 +2,10 @@ package com.MSCA.Ecommerce.services;
 
 import com.MSCA.Ecommerce.entities.Invoice;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
+//import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.context.Context;
 
 import java.io.File;
@@ -11,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.thymeleaf.TemplateEngine;
 
@@ -33,6 +36,8 @@ public class PdfService {
         this.templateEngine = templateEngine;
     }
 
+
+    @Transactional(rollbackFor = Exception.class)
     public String generateInvoicePdf(Invoice invoice) {
         try {
             // STEP 1: Prepare data
@@ -62,12 +67,17 @@ public class PdfService {
                 builder.run();
             }
 
+            System.out.println(outputPath);
             return outputPath;
 
-        } catch (IOException e) {
-            throw new RuntimeException("Directory creation or file write failed: " + e.getMessage(), e);
-        } catch (Exception e) {
-            throw new RuntimeException("PDF generation failed: " + e.getMessage(), e);
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.err.println("Cannot find directory and path: "+ e.getMessage());
+                return "FAILED";
+            }catch (Exception e) {
+                e.printStackTrace();
+                System.err.println("PDF generation failed: " + e.getMessage());
+                return "FAILED";
         }
     }
 }
